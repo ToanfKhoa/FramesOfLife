@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -66,7 +67,28 @@ public class DraggableFrame : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
     public void Setup(Sprite sprite, int index)
     {
-        image.sprite = sprite;
+        //tim image con
+        foreach (Transform child in transform)
+        {
+            Image img = child.GetComponent<Image>();
+            if (img != null)
+            {
+                img.sprite = sprite;
+                break;
+            }
+        }
+
         correctIndex = index;
     }
+    public Sprite GetSprite()
+    {
+        foreach (Transform child in transform)
+        {
+            Image img = child.GetComponent<Image>();
+            if (img != null)
+                return img.sprite;
+        }
+        return null;
+    }
+
 }

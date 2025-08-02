@@ -27,15 +27,10 @@ public class CheckFrame: MonoBehaviour
             indexes.Add(frame.correctIndex);
 
             //tong hop anh da xep thanh mang de tao animation
-            var img = content.GetChild(i).GetComponent<UnityEngine.UI.Image>();
-            if (img != null && img.sprite != null)
-            {
-                spriteList.Add(img.sprite);
-            }
+            spriteList.Add(content.GetChild(i).GetComponent<DraggableFrame>().GetSprite());
         }
 
         //tao 6 anim dua vao scrollview anim
-        Sprite[] sprites = spriteList.ToArray();
         for (int i=1; i<=5; i++)
         {
             Sprite[] shifted = RotateSprites(spriteList.ToArray(), i);
@@ -72,11 +67,13 @@ public class CheckFrame: MonoBehaviour
     private void CreateSimpleFrameAnimation(Sprite[] sprites)
     {
         GameObject obj = Instantiate(frameAnimPrefab, contentParentAnim);
-        Image img = obj.GetComponent<Image>();
-        if (img == null)
+
+        // Lấy image từ con của prefab
+        Image img = null;
+        foreach (Transform child in obj.transform)
         {
-            Debug.LogWarning("Thiếu Image component trong prefab.");
-            return;
+            img = child.GetComponent<Image>();
+            if (img != null) break;
         }
 
         obj.AddComponent<SimpleSpriteAnimator>().StartAnimation(img, sprites, 12f);

@@ -126,12 +126,12 @@ TextureImporter:
       name: cat_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 1226
-        width: 968
-        height: 433
+        x: 0
+        y: 1000
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: cat_1
       rect:
         serializedVersion: 2
-        x: 1014
-        y: 1190
-        width: 923
-        height: 497
+        x: 1000
+        y: 1000
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: cat_2
       rect:
         serializedVersion: 2
-        x: 2019
-        y: 1186
-        width: 917
-        height: 501
+        x: 2000
+        y: 1000
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,12 +189,12 @@ TextureImporter:
       name: cat_3
       rect:
         serializedVersion: 2
-        x: 11
-        y: 238
-        width: 924
-        height: 447
+        x: 0
+        y: 0
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: cat_4
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 231
-        width: 866
-        height: 525
+        x: 1000
+        y: 0
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,12 +231,12 @@ TextureImporter:
       name: cat_5
       rect:
         serializedVersion: 2
-        x: 2021
-        y: 203
-        width: 852
-        height: 514
+        x: 2000
+        y: 0
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
