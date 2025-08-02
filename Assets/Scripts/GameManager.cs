@@ -22,6 +22,23 @@ public class GameManager : MonoBehaviour
     public float maxSpeed = 200f;
     public float acceleration = 50f;
 
+    [Header("ScrollViewAnim")]
+    public RectTransform contentParentAnim;
+    public GameObject scrollViewAnimObj;
+    public CanvasGroup scrollViewAnim;
+    public float moveRange = 0;
+
+    public float fadeDuration = 0f; // thời gian hoàn thành fade
+    private float fadeTimer = 0f;
+
+    public float rangeLerpDuration = 0f; //thoi gian giam dan bien do lac lu cua anim
+    private float rangeLerpTime = 0f;
+
+    private float offset = 0;
+    private float currentRange = 0;
+    private bool isLerp  = false;
+    private Vector2 initialPosition;
+
     private void Awake()
     {
         // Singleton pattern
@@ -37,6 +54,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        initialPosition = contentParent.anchoredPosition;
+
+        if (scrollViewAnim != null)
+            scrollViewAnim.alpha = 0f; 
+
         LoadLevel(currentLevel);
     }
 
@@ -45,14 +67,37 @@ public class GameManager : MonoBehaviour
         if (!isRunning)
             return;
 
-        Debug.Log("chay");
         // Tăng tốc dần cho đến khi đạt maxSpeed
         if (currentSpeed < maxSpeed)
         {
             currentSpeed += acceleration * Time.deltaTime;
             if (currentSpeed > maxSpeed)
+            {
                 currentSpeed = maxSpeed;
+            }
+                
         }
+
+        //hien anim khi max speed
+        if(currentSpeed >= maxSpeed )
+        {
+            //hien len anim
+            if (scrollViewAnim != null)
+            {
+                fadeTimer += Time.deltaTime;
+                float t = Mathf.Clamp01(fadeTimer / fadeDuration);
+                scrollViewAnim.alpha = Mathf.Lerp(0f, 0.8f, t);
+
+                //giam dan hieu ung lac lu cho anim
+                rangeLerpTime += Time.deltaTime;
+                float v = Mathf.Clamp01(rangeLerpTime / rangeLerpDuration);
+                currentRange = Mathf.Lerp(moveRange, 1f, v);
+            }
+            //giut giut contentanim
+            offset = Mathf.PingPong(Time.time * 1000, currentRange) - currentRange / 2f;
+            contentParentAnim.anchoredPosition = new Vector2(initialPosition.x + offset, initialPosition.y);
+        }
+
 
         foreach (RectTransform frame in frames)
         {
@@ -125,8 +170,11 @@ public class GameManager : MonoBehaviour
     public void StartScrolling()
     {
         isRunning = true;
-        Debug.Log("scrolling di");
         currentSpeed = 0f; // bat dau tu 0
+
+        //hien len khi obj scrollview vi da an truoc do de co the keo tha
+        if (!scrollViewAnimObj.activeInHierarchy)
+            scrollViewAnimObj.SetActive(true);
     }
 
     public bool CheckPlayerOrder()
