@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Level01
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: -1991139739, guid: 32600d8e98ee053418bef7048a25d28e, type: 3}
-  - {fileID: -1088554459, guid: 32600d8e98ee053418bef7048a25d28e, type: 3}
-  - {fileID: 1642451816, guid: 32600d8e98ee053418bef7048a25d28e, type: 3}
-  - {fileID: 440771755, guid: 32600d8e98ee053418bef7048a25d28e, type: 3}
-  - {fileID: 1951914407, guid: 32600d8e98ee053418bef7048a25d28e, type: 3}
-  - {fileID: -1638081146, guid: 32600d8e98ee053418bef7048a25d28e, type: 3}
-  animation: {fileID: 7400000, guid: 41693ff4b9eeb4b4ca710cb6b3cda138, type: 2}
+  - {fileID: 169946289, guid: 3ed81289006803142b2a69d4dfa7ba1c, type: 3}
+  - {fileID: -518344066, guid: 3ed81289006803142b2a69d4dfa7ba1c, type: 3}
+  - {fileID: -1885202318, guid: 3ed81289006803142b2a69d4dfa7ba1c, type: 3}
+  - {fileID: -339477186, guid: 3ed81289006803142b2a69d4dfa7ba1c, type: 3}
+  - {fileID: -1316060692, guid: 3ed81289006803142b2a69d4dfa7ba1c, type: 3}
+  - {fileID: 1645845915, guid: 3ed81289006803142b2a69d4dfa7ba1c, type: 3}

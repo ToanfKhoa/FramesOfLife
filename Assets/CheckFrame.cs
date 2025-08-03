@@ -72,7 +72,7 @@ public class CheckFrame: MonoBehaviour
         List<int> indexes = new List<int>();
         List<Sprite> spriteList = new List<Sprite>();
 
-        for (int i = 1; i < count - 1; i++)
+        for (int i = 1; i < count; i++)
         {
             var frame = content.GetChild(i).GetComponent<DraggableFrame>();
             indexes.Add(frame.correctIndex);
@@ -169,11 +169,12 @@ public class CheckFrame: MonoBehaviour
         Image img = null;
         foreach (Transform child in obj.transform)
         {
+            Debug.Log("CreateSimpleFrameAnimation-frame: ");
             img = child.GetComponent<Image>();
             if (img != null) break;
         }
 
-        obj.AddComponent<SimpleSpriteAnimator>().StartAnimation(img, sprites, 12f);
+        obj.AddComponent<SimpleSpriteAnimator>().StartAnimation(img, sprites, 6f);
     }
     private Sprite[] RotateSprites(Sprite[] original, int offset)
     {
