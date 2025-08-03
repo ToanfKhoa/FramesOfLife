@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     public CanvasGroup blackPanel;
 
+    public CutScene cutScene;
+
     private float offset = 0;
     private float currentRange = 0;
     private bool isStop  = false;
@@ -316,6 +318,14 @@ public class GameManager : MonoBehaviour
         TransitionPanel();
 
         int currentIndex = System.Array.IndexOf(levels, currentLevel);
+
+        
+        //cutScene
+        if(currentIndex==0)
+        {
+            Debug.Log("start cutscene");
+            cutScene.StartCutscene(cutScene.workSprites);
+        }
 
         if (currentIndex >= 0 && currentIndex < levels.Length - 1)
         {
