@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +10,58 @@ public class CheckFrame: MonoBehaviour
 {
     public GameObject frameAnimPrefab;
     public RectTransform contentParentAnim;
+    public TextMeshProUGUI resultText;
 
+    public Button button;
+    public float fadeDuration = 1f;
+    public float fadeDurationResult = 0f;
+
+    public CanvasGroup canvasGroup; //ho tro fade cho button
+    public CanvasGroup scrollBar;
+    public RectTransform scrollViewRect; // Kéo ScrollRect vào Inspector
+
+    public GameObject tryAgainButton;
+    public CanvasGroup tryAgainCanvasGroup;
+
+    private List<string> correctMessages = new List<string>
+    {
+        "Perfect!",
+        "Well done!",
+        "That’s it!",
+        "Correct order!",
+        "Nice work!",
+        "You nailed it!"
+    };
+
+    private List<string> incorrectMessages = new List<string>
+    {
+        "Oops! Try again!",
+        "Wrong order!",
+        "Almost there!",
+        "Hmm... not quite.",
+        "Keep trying!",
+        "Not correct yet."
+    };
     public void OnPlayButtonClick()
     {
+        //di chuyen tap trung vao frame
+        Vector3 middlePosition = new Vector3(scrollViewRect.anchoredPosition.x, 0f, 0f);
+        scrollViewRect.DOAnchorPos(middlePosition, fadeDuration*2).SetEase(Ease.InOutSine);
+        //button bien mat
+        button.interactable = false; // không cho bấm
+        canvasGroup.DOFade(0, fadeDuration).OnComplete(() =>
+        {
+            gameObject.SetActive(false); // ẩn luôn sau fade
+        });
+        scrollBar.DOFade(0, fadeDuration).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+        });
+        //hien result
+        canvasGroup.alpha = 0f;
+        canvasGroup.DOFade(1f, fadeDuration);
+
+
         GameManager.Instance.StartScrolling(); //chay frame
 
         Transform content = GameManager.Instance.contentParent;
@@ -35,13 +86,51 @@ public class CheckFrame: MonoBehaviour
         {
             Sprite[] shifted = RotateSprites(spriteList.ToArray(), i);
             CreateSimpleFrameAnimation(shifted);
-        }    
+        }
 
         //check
+        // Cập nhật kết quả vào Text
         if (IsCircularSortedOptimized(indexes))
-            Debug.Log("Hợp lệ");
+        {
+            resultText.text = GetRandomMessage(correctMessages);
+            ShowWithFadeCorrect();
+        }
         else
-            Debug.Log("Không hợp lệ");
+        {
+            resultText.text = GetRandomMessage(incorrectMessages);
+            ShowWithFadeInCorrect();
+        }
+    }
+    public void ShowWithFadeCorrect()
+    {
+        resultText.gameObject.SetActive(true);
+        resultText.alpha = 0f;
+
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(fadeDurationResult); // chờ một khoảng thời gian
+        seq.Append( DOTween.To(() => resultText.alpha, x => resultText.alpha = x, 1f, fadeDuration) );
+        
+    }
+    public void ShowWithFadeInCorrect()
+    {
+        resultText.gameObject.SetActive(true);
+        resultText.alpha = 0f;
+
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(fadeDurationResult); // chờ một khoảng thời gian
+        seq.Append(DOTween.To(() => resultText.alpha, x => resultText.alpha = x, 1f, fadeDuration));
+
+        //tryagain button
+        tryAgainButton.SetActive(true); // Hiện đối tượng
+        tryAgainButton.GetComponent<Button>().interactable = true;
+        tryAgainCanvasGroup.alpha = 0f; // Đảm bảo bắt đầu từ 0
+        seq.Append(tryAgainCanvasGroup.DOFade(1f, 0.5f));
+
+    }
+    private string GetRandomMessage(List<string> messages)
+    {
+        int rand = UnityEngine.Random.Range(0, messages.Count);
+        return messages[rand];
     }
 
     private bool IsCircularSortedOptimized(List<int> list)
@@ -87,5 +176,19 @@ public class CheckFrame: MonoBehaviour
             rotated[i] = original[(i + offset) % len];
         }
         return rotated;
+    }
+
+    public void ResetCheckButton()
+    {
+        gameObject.SetActive(true); // bật lên trước khi fade
+
+        canvasGroup.alpha = 0;
+        canvasGroup.DOFade(1, fadeDuration).OnComplete(() =>
+        {
+            button.interactable = true; // cho bấm sau khi đã hiện xong
+        });
+
+        scrollBar.alpha = 0;
+        scrollBar.DOFade(1, fadeDuration);
     }
 }

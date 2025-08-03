@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     private float offset = 0;
     private float currentRange = 0;
-    private bool isLerp  = false;
+    private bool isStop  = false;
     private Vector2 initialPosition;
 
     private void Awake()
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
             return;
 
         // Tăng tốc dần cho đến khi đạt maxSpeed
-        if (currentSpeed < maxSpeed)
+        if (currentSpeed < maxSpeed && !isStop)
         {
             currentSpeed += acceleration * Time.deltaTime;
             if (currentSpeed > maxSpeed)
@@ -77,9 +78,21 @@ public class GameManager : MonoBehaviour
             }
                 
         }
+        else
+        if(isStop)
+        {
+            currentSpeed -= acceleration * Time.deltaTime;
+            if (currentSpeed < 0)
+            {
+                currentSpeed = 0;
+
+                //reset
+                ResetScrollingState();
+            }
+        }
 
         //hien anim khi max speed
-        if(currentSpeed >= maxSpeed )
+        if(currentSpeed >= maxSpeed && !isStop)
         {
             //hien len anim
             if (scrollViewAnim != null)
@@ -92,6 +105,25 @@ public class GameManager : MonoBehaviour
                 rangeLerpTime += Time.deltaTime;
                 float v = Mathf.Clamp01(rangeLerpTime / rangeLerpDuration);
                 currentRange = Mathf.Lerp(moveRange, 1f, v);
+            }
+            //giut giut contentanim
+            offset = Mathf.PingPong(Time.time * 1000, currentRange) - currentRange / 2f;
+            contentParentAnim.anchoredPosition = new Vector2(initialPosition.x + offset, initialPosition.y);
+        }
+        else
+        if(isStop)
+        {
+            //lam mat anim
+            if (scrollViewAnim != null)
+            {
+                fadeTimer += Time.deltaTime;
+                float t = Mathf.Clamp01(fadeTimer / fadeDuration);
+                scrollViewAnim.alpha = Mathf.Lerp(0.8f, 0f, t);
+
+                //tang dan hieu ung lac lu cho anim
+                rangeLerpTime += Time.deltaTime;
+                float v = Mathf.Clamp01(rangeLerpTime / rangeLerpDuration);
+                currentRange = Mathf.Lerp(1, moveRange, v);
             }
             //giut giut contentanim
             offset = Mathf.PingPong(Time.time * 1000, currentRange) - currentRange / 2f;
@@ -187,4 +219,58 @@ public class GameManager : MonoBehaviour
         }
         return true;
     }
+
+    public void StopScrolling()
+    {
+        // Reset lại thời gian và biên độ
+        fadeTimer = 0f;
+        rangeLerpTime = 0f;
+
+        float targetRange = 20f; // tăng biên độ dao động khi dừng
+        float duration = 4f;
+
+        /*// Tween làm tăng biên độ dao động sau khi dừng
+        DOTween.To(() => currentRange, x => currentRange = x, targetRange, 3)
+            .SetEase(Ease.OutSine);*/
+
+        /*// Tween làm mờ scrollViewAnim
+        scrollViewAnim.DOFade(0f, duration).SetEase(Ease.InSine).OnComplete(() =>
+        {
+            scrollViewAnimObj.SetActive(false);
+        });*/
+
+        // Tween giảm tốc độ scroll của các frame
+        isStop = true;
+    }
+    public void ResetScrollingState()
+    {
+        isRunning = false;
+        isStop = false;
+        currentSpeed = 0f;
+
+        fadeTimer = 0f;
+        rangeLerpTime = 0f;
+        currentRange = 0f;
+        offset = 0f;
+
+        if (scrollViewAnim != null)
+        {
+            scrollViewAnim.alpha = 0f;
+        }
+
+        if (scrollViewAnimObj != null && scrollViewAnimObj.activeSelf)
+        {
+            scrollViewAnimObj.SetActive(false);
+        }
+
+        contentParentAnim.anchoredPosition = initialPosition;
+
+        //clear child contentparentanim
+        foreach (Transform child in contentParentAnim)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+
 }

@@ -4,5 +4,4 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     public Sprite[] sprites;  //xep theo thu tu chinh xac
-    public AnimationClip animation;
 }
