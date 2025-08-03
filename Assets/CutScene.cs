@@ -12,6 +12,7 @@ public class CutScene : MonoBehaviour
     //Cac danh sách sprite sẽ chạy
     public List<Sprite> level0;            
     public List<Sprite> level1;
+    public List<Sprite> level2;
     public List<Sprite> endLevel;
 
     public int loopCount = 3;                   // Số vòng lặp cutscene
@@ -64,6 +65,46 @@ public class CutScene : MonoBehaviour
 
         // Kết thúc cutscene, có thể ẩn hoặc load scene khác ở đây nếu muốn
         this.gameObject.SetActive(false);
+        Debug.Log("Cutscene kết thúc.");
+    }
+
+    public void StartCutsceneEnd(List<Sprite> sprites)
+    {
+        this.gameObject.SetActive(true);
+        if (sprites == null || sprites.Count == 0 || imageTarget == null)
+        {
+            Debug.LogWarning("Thiếu dữ liệu cutscene!");
+            return;
+        }
+
+        StartCoroutine(PlayCutsceneEnd(sprites));
+    }
+
+    private IEnumerator PlayCutsceneEnd(List<Sprite> sprites)
+    {
+        /*foreach (var sprite in sprites)
+        {
+            imageTarget.sprite = sprite;
+            yield return new WaitForSeconds(delayBetweenSprites);
+        }*/
+        for (int loop = 0; loop < loopCount; loop++)
+        {
+            foreach (var sprite in sprites)
+            {
+                imageTarget.sprite = sprite;
+                yield return new WaitForSeconds(delayBetweenSprites);
+            }
+        }
+
+        // Hiện panel nếu có
+        if (panelToShow != null)
+        {
+            panelToShow.SetActive(true);
+            yield return new WaitForSeconds(panelDuration);
+        }
+
+        // Kết thúc cutscene, có thể ẩn hoặc load scene khác ở đây nếu muốn
+        cutSceneText.text = "try something new...THE END";
         Debug.Log("Cutscene kết thúc.");
     }
 

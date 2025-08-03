@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.PlayMainTheme();
+
         initialPosition = contentParent.anchoredPosition;
 
         if (scrollViewAnim != null)
@@ -192,7 +194,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Xáo trộn danh sách
-        //Shuffle(spriteList);
+        Shuffle(spriteList);
 
         // Tạo frame với sprite và correctIndex tương ứng
         foreach (var entry in spriteList)
@@ -330,6 +332,16 @@ public class GameManager : MonoBehaviour
         {
             cutScene.StartCutscene(cutScene.level1);
         }
+        if(currentIndex==2)
+        {
+            cutScene.StartCutscene(cutScene.level1);
+        }
+        if(currentIndex==3)
+        {
+            SoundManager.Instance.PlayEndingTheme();
+            cutScene.StartCutsceneEnd(cutScene.endLevel);
+        }
+        
 
         if (currentIndex >= 0 && currentIndex < levels.Length - 1)
         {
