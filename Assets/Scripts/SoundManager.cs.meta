@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 252926ba2fa8ee24db5e14e1979395d7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainThemeSound: {fileID: 8300000, guid: a6e7bdafeeceb864789c3ba12c5317ec, type: 3}
+  - endingThemeSound: {fileID: 8300000, guid: 191d3d21aff2a6c49b9da02ce5b971f7, type: 3}
+  - musicSource: {instanceID: 0}
+  - noiseSound: {instanceID: 0}
+  - birdSound: {fileID: 8300000, guid: 438c5649277a40244a72b081d448bc44, type: 3}
+  - catSound: {fileID: 8300000, guid: 0d22110c1f10a17459ecf0daa93774bc, type: 3}
+  - alarmSound: {fileID: 8300000, guid: 1cdb25a7ba66ce74abddf062498d59c8, type: 3}
+  - tickSound: {fileID: 8300000, guid: c938d4d429d88a145bb9c459d13ef07f, type: 3}
+  - UISound: {fileID: 8300000, guid: 1d1443258acabfd47861e5fc5afe1583, type: 3}
+  - sfxSource: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
