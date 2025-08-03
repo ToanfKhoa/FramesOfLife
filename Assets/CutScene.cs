@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CutScene : MonoBehaviour
 {
     public Image imageTarget;               // Component Image UI để hiển thị ảnh
+    public TextMeshProUGUI cutSceneText;
 
     //Cac danh sách sprite sẽ chạy
-    public List<Sprite> workSprites;            
-    public List<Sprite> phoneSprites;          
-    public List<Sprite> nightSprites;           
-    public List<Sprite> morningSprites;
+    public List<Sprite> level0;            
+    public List<Sprite> level1;
+    public List<Sprite> endLevel;
 
     public int loopCount = 3;                   // Số vòng lặp cutscene
 
@@ -64,5 +65,10 @@ public class CutScene : MonoBehaviour
         // Kết thúc cutscene, có thể ẩn hoặc load scene khác ở đây nếu muốn
         this.gameObject.SetActive(false);
         Debug.Log("Cutscene kết thúc.");
+    }
+
+    public void SetText(string s)
+    {
+        cutSceneText.text = s;
     }
 }

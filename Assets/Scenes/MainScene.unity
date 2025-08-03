@@ -919,24 +919,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageTarget: {fileID: 530170112}
-  workSprites:
+  cutSceneText: {fileID: 473327642}
+  level0:
   - {fileID: 1734782902, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
   - {fileID: -89204234, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
   - {fileID: 470967812, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
-  phoneSprites:
+  - {fileID: 1734782902, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: -89204234, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: 470967812, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
   - {fileID: 339680605, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
   - {fileID: -113475323, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
   - {fileID: -1451088185, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
-  nightSprites:
+  - {fileID: 339680605, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: -113475323, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: -1451088185, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
   - {fileID: 718777591, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
   - {fileID: 251933886, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
   - {fileID: -1986608030, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
-  morningSprites:
+  - {fileID: 718777591, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  - {fileID: 251933886, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  - {fileID: -1986608030, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  level1:
   - {fileID: 291684892, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
   - {fileID: 1712042374, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
   - {fileID: 29079428, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
-  loopCount: 3
-  delayBetweenSprites: 0.2
+  - {fileID: 291684892, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 1712042374, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 29079428, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 1734782902, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: -89204234, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: 470967812, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: 1734782902, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: -89204234, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: 470967812, guid: 29b79177234c7df4ea85fd02f3936159, type: 3}
+  - {fileID: 339680605, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: -113475323, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: -1451088185, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: 339680605, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: -113475323, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: -1451088185, guid: 2c044dbbb168d9f40a84309f1deed00d, type: 3}
+  - {fileID: 718777591, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  - {fileID: 251933886, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  - {fileID: -1986608030, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  - {fileID: 718777591, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  - {fileID: 251933886, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  - {fileID: -1986608030, guid: c2a4b866eebee7e4e999f2d2e2f99627, type: 3}
+  endLevel:
+  - {fileID: 291684892, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 1712042374, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 29079428, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 291684892, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 1712042374, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: 29079428, guid: c01898fddb25bbe40a70ce24ae2bfa58, type: 3}
+  - {fileID: -187036714, guid: 81cdca51eb9fcd045ab6cb91aca86517, type: 3}
+  - {fileID: -187036714, guid: 81cdca51eb9fcd045ab6cb91aca86517, type: 3}
+  - {fileID: -1948075744, guid: 81cdca51eb9fcd045ab6cb91aca86517, type: 3}
+  - {fileID: -1948075744, guid: 81cdca51eb9fcd045ab6cb91aca86517, type: 3}
+  - {fileID: -1127981622, guid: 81cdca51eb9fcd045ab6cb91aca86517, type: 3}
+  - {fileID: -1127981622, guid: 81cdca51eb9fcd045ab6cb91aca86517, type: 3}
+  - {fileID: 21300000, guid: 66fe24fc6b2214348b3716a599917e90, type: 3}
+  - {fileID: 21300000, guid: 66fe24fc6b2214348b3716a599917e90, type: 3}
+  loopCount: 1
+  delayBetweenSprites: 0.4
   panelToShow: {fileID: 1353712978}
   panelDuration: 3
 --- !u!114 &530170112

@@ -174,7 +174,7 @@ public class CheckFrame: MonoBehaviour
             if (img != null) break;
         }
 
-        obj.AddComponent<SimpleSpriteAnimator>().StartAnimation(img, sprites, 6f);
+        obj.AddComponent<SimpleSpriteAnimator>().StartAnimation(img, sprites, 12f);
     }
     private Sprite[] RotateSprites(Sprite[] original, int offset)
     {

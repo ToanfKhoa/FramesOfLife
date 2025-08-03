@@ -324,7 +324,11 @@ public class GameManager : MonoBehaviour
         if(currentIndex==0)
         {
             Debug.Log("start cutscene");
-            cutScene.StartCutscene(cutScene.workSprites);
+            cutScene.StartCutscene(cutScene.level0);
+        }
+        if(currentIndex==1)
+        {
+            cutScene.StartCutscene(cutScene.level1);
         }
 
         if (currentIndex >= 0 && currentIndex < levels.Length - 1)

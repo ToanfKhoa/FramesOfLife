@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level02
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 510312525, guid: f3f780797d3278c40a99d8ed81ef6938, type: 3}
-  - {fileID: -1091474343, guid: f3f780797d3278c40a99d8ed81ef6938, type: 3}
-  - {fileID: 1850414467, guid: f3f780797d3278c40a99d8ed81ef6938, type: 3}
-  - {fileID: 272595169, guid: f3f780797d3278c40a99d8ed81ef6938, type: 3}
-  - {fileID: 871978334, guid: f3f780797d3278c40a99d8ed81ef6938, type: 3}
-  - {fileID: -886614911, guid: f3f780797d3278c40a99d8ed81ef6938, type: 3}
+  - {fileID: -397631357, guid: 7ec9a989d896d4842abdf24ce31cb304, type: 3}
+  - {fileID: -322882850, guid: 7ec9a989d896d4842abdf24ce31cb304, type: 3}
+  - {fileID: -1632605965, guid: 7ec9a989d896d4842abdf24ce31cb304, type: 3}
+  - {fileID: 1769854160, guid: 7ec9a989d896d4842abdf24ce31cb304, type: 3}
+  - {fileID: 920113378, guid: 7ec9a989d896d4842abdf24ce31cb304, type: 3}
+  - {fileID: 1733304413, guid: 7ec9a989d896d4842abdf24ce31cb304, type: 3}
