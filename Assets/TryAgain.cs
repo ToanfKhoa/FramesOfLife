@@ -22,6 +22,7 @@ public class TryAgain : MonoBehaviour
 
     public void OnClickTryAgain()
     {
+        Debug.Log("Try Again");
         GameManager.Instance.StopScrolling();
 
         //di chuyen scrollview ve vi tri cu
@@ -39,7 +40,6 @@ public class TryAgain : MonoBehaviour
 
 
         //hien button check, scrollbar
-        //button bien mat
         buttonCheck.interactable = true; 
         canvasGroupButtonCheck.DOFade(1, fadeDuration).OnComplete(() =>
         {

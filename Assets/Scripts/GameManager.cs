@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
     public float rangeLerpDuration = 0f; //thoi gian giam dan bien do lac lu cua anim
     private float rangeLerpTime = 0f;
 
+    public CanvasGroup blackPanel;
+
     private float offset = 0;
     private float currentRange = 0;
     private bool isStop  = false;
@@ -58,15 +62,20 @@ public class GameManager : MonoBehaviour
         initialPosition = contentParent.anchoredPosition;
 
         if (scrollViewAnim != null)
-            scrollViewAnim.alpha = 0f; 
+            scrollViewAnim.alpha = 0f;
 
         LoadLevel(currentLevel);
+
     }
 
     private void Update()
     {
+        Debug.Log("isstop: " + isStop);
         if (!isRunning)
+        {
+            Debug.Log("isRunning false");
             return;
+        }
 
         // Tăng tốc dần cho đến khi đạt maxSpeed
         if (currentSpeed < maxSpeed && !isStop)
@@ -87,7 +96,7 @@ public class GameManager : MonoBehaviour
                 currentSpeed = 0;
 
                 //reset
-                ResetScrollingState();
+                //ResetScrollingState(); tam
             }
         }
 
@@ -131,7 +140,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        foreach (RectTransform frame in frames)
+        /*foreach (RectTransform frame in frames)
         {
             frame.anchoredPosition += Vector2.left * currentSpeed * Time.deltaTime;
 
@@ -140,7 +149,26 @@ public class GameManager : MonoBehaviour
                 float maxX = GetRightmostX();
                 frame.anchoredPosition = new Vector2(maxX + frameWidth, frame.anchoredPosition.y);
             }
+        }*/
+        for (int i = frames.Count - 1; i >= 0; i--)
+        {
+            RectTransform frame = frames[i];
+            if (frame == null)
+            {
+                Debug.Log("Frame null");
+                frames.RemoveAt(i);
+                continue;
+            }
+            Debug.Log("chay chay");
+            frame.anchoredPosition += Vector2.left * currentSpeed * Time.deltaTime;
+
+            if (frame.anchoredPosition.x < -frameWidth / 2)
+            {
+                float maxX = GetRightmostX();
+                frame.anchoredPosition = new Vector2(maxX + frameWidth, frame.anchoredPosition.y);
+            }
         }
+        Debug.Log("update");
     }
 
     private float GetRightmostX()
@@ -162,7 +190,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Xáo trộn danh sách
-        Shuffle(spriteList);
+        //Shuffle(spriteList);
 
         // Tạo frame với sprite và correctIndex tương ứng
         foreach (var entry in spriteList)
@@ -179,7 +207,11 @@ public class GameManager : MonoBehaviour
     {
         frames.Clear();
         foreach (Transform child in contentParent)
+        {
             frames.Add(child as RectTransform);
+            Debug.Log("name child: "+child.name);
+        }
+        Debug.Log("cacheframe");
     }
 
     private void Shuffle<T>(List<T> list)
@@ -197,10 +229,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        frames.Clear();
     }
 
     public void StartScrolling()
     {
+        Debug.Log("start scrolling");
         isRunning = true;
         currentSpeed = 0f; // bat dau tu 0
 
@@ -242,6 +276,10 @@ public class GameManager : MonoBehaviour
         // Tween giảm tốc độ scroll của các frame
         isStop = true;
     }
+    public void SetIsStop(bool value)
+    {
+        isStop = value;
+    }
     public void ResetScrollingState()
     {
         isRunning = false;
@@ -272,5 +310,49 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GoToNextLevel()
+    {
+        //hieu ung chuyen canh
+        TransitionPanel();
 
+        int currentIndex = System.Array.IndexOf(levels, currentLevel);
+
+        if (currentIndex >= 0 && currentIndex < levels.Length - 1)
+        {
+            currentLevel = levels[currentIndex + 1];
+
+            // Clear old frames
+            ClearFrames();
+
+            // Reset animation & scroll states
+            ResetScrollingState();
+
+            // Load next level
+            //LoadLevel(currentLevel);
+            StartCoroutine(LoadLevelCoroutine());
+
+            Debug.Log("Loaded level " + currentIndex + " → " + (currentIndex + 1));
+        }
+        else
+        {
+            Debug.Log("No more levels!");
+        }
+    }
+    IEnumerator LoadLevelCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        LoadLevel(currentLevel);
+    }
+
+    public void TransitionPanel()
+    {
+        blackPanel.gameObject.SetActive(true);
+        blackPanel.alpha = 0f;
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(blackPanel.DOFade(1f, 0f));       // Fade in
+        seq.AppendInterval(0.5f);                              // Tam dung
+        seq.Append(blackPanel.DOFade(0f, 1f));       // Fade out
+        seq.OnComplete(() => blackPanel.gameObject.SetActive(false));
+    }
 }

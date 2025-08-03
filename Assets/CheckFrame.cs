@@ -109,7 +109,15 @@ public class CheckFrame: MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(fadeDurationResult); // chờ một khoảng thời gian
         seq.Append( DOTween.To(() => resultText.alpha, x => resultText.alpha = x, 1f, fadeDuration) );
-        
+
+        seq.AppendInterval(5f); // giữ lại trạng thái hiển thị một lúc (tùy chỉnh thời gian)
+        seq.AppendCallback(() =>
+        {
+            GameManager.Instance.GoToNextLevel();
+            //dung click try again lam set lai bien isstop gay loi
+            tryAgainButton.GetComponent<TryAgain>().OnClickTryAgain();
+            GameManager.Instance.SetIsStop(false);
+        });
     }
     public void ShowWithFadeInCorrect()
     {
