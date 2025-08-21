@@ -137,6 +137,12 @@ public class GameManager : MonoBehaviour
                 rangeLerpTime += Time.deltaTime;
                 float v = Mathf.Clamp01(rangeLerpTime / rangeLerpDuration);
                 currentRange = Mathf.Lerp(1, moveRange, v);
+
+                //khi fade xong thì tắt object
+                if (t >= 1f)
+                {
+                    scrollViewAnim.gameObject.SetActive(false);
+                }
             }
             //giut giut contentanim
             offset = Mathf.PingPong(Time.time * 1000, currentRange) - currentRange / 2f;
@@ -238,6 +244,7 @@ public class GameManager : MonoBehaviour
 
     public void StartScrolling()
     {
+        isStop = false;
         Debug.Log("start scrolling");
         isRunning = true;
         currentSpeed = 0f; // bat dau tu 0

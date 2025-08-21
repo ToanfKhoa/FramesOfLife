@@ -44,6 +44,7 @@ public class CheckFrame: MonoBehaviour
     };
     public void OnPlayButtonClick()
     {
+        GameManager.Instance.ResetScrollingState();
         //di chuyen tap trung vao frame
         Vector3 middlePosition = new Vector3(scrollViewRect.anchoredPosition.x, 0f, 0f);
         scrollViewRect.DOAnchorPos(middlePosition, fadeDuration*2).SetEase(Ease.InOutSine);
